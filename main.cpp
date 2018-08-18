@@ -32,6 +32,8 @@
 
 #include "Wire.h"
 
+#include "Moisture.h"
+
 #ifdef ESP8266
   #include <FS.h>
   #include "gpio.h"
@@ -83,6 +85,8 @@ static uint16_t led_blink_ms = LED_FAST_BLINK;
 // ====== Object defines ======
 OpenSprinkler os; // OpenSprinkler object
 ProgramData pd;   // ProgramdData object
+Adafruit_ADS1015 ad;
+Moisture ms(ad);    // moisture sensor
 
 /* ====== Robert Hillman (RAH)'s implementation of flow sensor ======
  * flow_begin - time when valve turns on
@@ -370,6 +374,7 @@ void do_setup() {
   os.apply_all_station_bits(); // reset station bits
 
   os.button_timeout = LCD_BACKLIGHT_TIMEOUT;
+  ms.Init();
 }
 
 // Arduino software reset function

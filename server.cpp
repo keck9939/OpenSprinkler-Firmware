@@ -24,6 +24,7 @@
 #include "OpenSprinkler.h"
 #include "program.h"
 #include "server.h"
+#include "Moisture.h"
 
 // External variables defined in main ion file
 #if defined(ARDUINO)
@@ -66,6 +67,7 @@ extern char tmp_buffer[];
 extern OpenSprinkler os;
 extern ProgramData pd;
 extern ulong flow_count;
+extern Moisture ms;
 
 #ifndef ESP8266
 static byte return_code;
@@ -1172,6 +1174,9 @@ void server_json_controller_main() {
   if(os.options[OPTION_SENSOR1_TYPE]==SENSOR_TYPE_FLOW) {
     bfill.emit_p(PSTR("\"flcrt\":$L,\"flwrt\":$D,"), os.flowcount_rt, FLOWCOUNT_RT_WINDOW);
   }
+
+  if(ms.IsPresent())
+    bfill.emit_p(PSTR("\"ms\":$D,"), ms.Value());
 
   bfill.emit_p(PSTR("\"sbits\":["));
   // print sbits

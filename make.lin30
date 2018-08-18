@@ -4,8 +4,9 @@ LIBS = .\
   $(ESP_LIBS)/ESP8266WiFi \
   $(ESP_LIBS)/ESP8266WebServer \
   $(ESP_LIBS)/ESP8266mDNS \
-  $(ESP_LIBS)/SSD1306 \
+  $(ESP_LIBS)/esp8266-oled-ssd1306 \
   $(ESP_LIBS)/rc-switch \
+  $(ESP_LIBS)/Adafruit_ADS1X15 \
 
 ESP_ROOT = $(HOME)/esp8266_2.4/
 BUILD_ROOT = /tmp/$(MAIN_NAME)
